@@ -1,22 +1,22 @@
-﻿
-namespace GoldJewelry.Core
+﻿namespace GoldJewelry.Core
 {
+    using Constants;
     using Contracts;
-    using GoldJewelry.IO.Contracts;
-    using GoldJewelry.Models.Contracts;
+    using IO.Contracts;
+    using Messages;
+    using Models;
+    using Models.Contracts;
     using System;
     using System.Collections.Generic;
     using System.Globalization;
-    using Messages;
-    using GoldJewelry.Constants;
     using System.Linq;
-    using GoldJewelry.Models;
 
     public class Engine : IEngine
     {
         private readonly IReader reader;
         private readonly IWriter fileWriter;
         private readonly IWriter consoleWriter;
+        private readonly FolderGenerator folderGenerator;
 
 
         public Engine(IReader reader, IWriter fileWriter, IWriter consoleWriter)
@@ -78,22 +78,22 @@ namespace GoldJewelry.Core
 
                 string size = (args.Length == 3) ? args[2] : null;
 
-                //if (wantFolders)
-                //{
-                //    string foldersPath = $@"..\Jewelry\Folders\{type} - {weight}";
+                if (wantFolders)
+                {
+                    string foldersPath = $@"..\Jewelry\Folders\{type} - {weight}";
 
-                //    if (size != null && size.All((char c) => char.IsDigit(c)))
-                //    {
-                //        foldersPath += $" - {size}р-р";
-                //    }
+                    if (size != null && size.All((char c) => char.IsDigit(c)))
+                    {
+                        foldersPath += $" - {size}р-р";
+                    }
 
-                //    if (Directory.Exists(foldersPath))
-                //    {
-                //        foldersPath += $"({++counter})";
-                //    }
+                    if (Directory.Exists(foldersPath))
+                    {
+                        foldersPath += $"({++counter})";
+                    }
 
-                //    Directory.CreateDirectory(foldersPath);
-                //}
+                    Directory.CreateDirectory(foldersPath);
+                }
 
                 decimal price = (decimal)jewel.Weight * pricePerGram;
 
