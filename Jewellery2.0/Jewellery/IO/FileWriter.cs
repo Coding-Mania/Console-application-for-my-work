@@ -5,7 +5,7 @@
     using Constants;
     using Contracts;
 
-    public class FileWriter : IWriter
+    public class FileWriter : IWriter, IClearable
     {
         private readonly StreamWriter streamWriter;
 
@@ -17,6 +17,11 @@
             }
 
             this.streamWriter = new StreamWriter(path);
+        }
+
+        public void Clear()
+        {
+            this.streamWriter.Close();
         }
 
         public void Write(string value)
