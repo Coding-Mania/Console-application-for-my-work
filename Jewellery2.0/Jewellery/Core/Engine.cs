@@ -7,7 +7,6 @@
     using Constants;
     using Contracts;
     using IO.Contracts;
-    using Messages;
     using Models;
     using Models.Contracts;
 
@@ -28,7 +27,7 @@
 
         public void Run()
         {
-            this.consoleWriter.Write(Messages.FolderMessage);
+            this.consoleWriter.Write(GlobalConstants.FolderMessage);
 
             string folderAnser = this.reader.ReadLine().ToLower();
 
@@ -36,13 +35,13 @@
 
             bool wantFolders = (folderAnser == "y" || folderAnser == "у") ? true : false;
 
-            this.consoleWriter.Write(Messages.PricePerGramMessage);
+            this.consoleWriter.Write(GlobalConstants.PricePerGramMessage);
             decimal pricePerGram = decimal.Parse(this.reader.ReadLine());
 
-            this.consoleWriter.Write(Messages.SellPricePerGramMessage);
+            this.consoleWriter.Write(GlobalConstants.SellPricePerGramMessage);
             decimal sellPrice = decimal.Parse(this.reader.ReadLine());
 
-            this.consoleWriter.Write(Messages.OnlineShopPricePerGramMessage);
+            this.consoleWriter.Write(GlobalConstants.OnlineShopPricePerGramMessage);
             decimal onlinePrice = decimal.Parse(this.reader.ReadLine());
 
             List<IJewelry> jewels = new List<IJewelry>();
@@ -91,12 +90,12 @@
 
                 if (size != null && size.All((char c) => char.IsDigit(c)))
                 {
-                    string jewelInfo = string.Format(GlobalConstants.JewesInfoExtend, jewel.Type, jewel.Weight, size, pricePerGram, price, sellPrice, sellSum, onlinePrice, onlineSell);
+                    string jewelInfo = string.Format(GlobalConstants.JewelsInfoExtend, jewel.Type, jewel.Weight, size, pricePerGram, price, sellPrice, sellSum, onlinePrice, onlineSell);
                     this.fileWriter.WriteLine(jewelInfo);
                 }
                 else
                 {
-                    string jewelInfo = string.Format(GlobalConstants.JewesInfo, jewel.Type, jewel.Weight, pricePerGram, price, sellPrice, sellSum, onlinePrice, onlineSell);
+                    string jewelInfo = string.Format(GlobalConstants.JewelsInfo, jewel.Type, jewel.Weight, pricePerGram, price, sellPrice, sellSum, onlinePrice, onlineSell);
                     this.fileWriter.WriteLine(jewelInfo);
                 }
             }
