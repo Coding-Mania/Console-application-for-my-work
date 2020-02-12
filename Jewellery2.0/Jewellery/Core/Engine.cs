@@ -3,7 +3,14 @@ namespace GoldJewelry.Core
 {
     using Contracts;
     using GoldJewelry.IO.Contracts;
+    using GoldJewelry.Models.Contracts;
+    using System;
+    using System.Collections.Generic;
     using System.Globalization;
+    using Messages;
+    using GoldJewelry.Constants;
+    using System.Linq;
+    using GoldJewelry.Models;
 
     public class Engine : IEngine
     {
@@ -23,7 +30,7 @@ namespace GoldJewelry.Core
         {
             CultureInfo culture = CultureInfo.CurrentCulture;
 
-            this.consoleWriter.WriteLine("Create folders? Y/N: ");
+            this.consoleWriter.Write(Messages.FolderMessage);
 
             string folderAnser = this.reader.ReadLine().ToLower();
 
@@ -32,73 +39,69 @@ namespace GoldJewelry.Core
 
             bool wantFolders = (folderAnser == "y" || folderAnser == "у") ? true : false;
 
-            this.consoleWriter.WriteLine("Enter price per gram: ");
+            this.consoleWriter.Write(Messages.PricePerGramMessage);
             decimal pricePerGram = decimal.Parse(this.reader.ReadLine());
 
-            this.consoleWriter.Write("Enter sell price per gram: ");
+            this.consoleWriter.Write(Messages.SellPricePerGramMessage);
             decimal sellPrice = decimal.Parse(this.reader.ReadLine());
 
-            this.consoleWriter.Write("Enter online shop sell price per gram: ");
+            this.consoleWriter.Write(Messages.OnlineShopPricePerGramMessage);
             decimal onlinePrice = decimal.Parse(this.reader.ReadLine());
 
-            var time = DateTime.Now;
 
             List<IJewelry> jewels = new List<IJewelry>();
 
-            var txtPath = @$"..\Jewelry";
+            //var txtPath = @$"..\Jewelry";
 
-            if (!Directory.Exists(txtPath))
-            {
-                Directory.CreateDirectory(txtPath);
-            }
+            //if (!Directory.Exists(txtPath))
+            //{
+            //    Directory.CreateDirectory(txtPath);
+            //}
 
-            StreamWriter streamWriter = new StreamWriter(@$"..\Jewelry\Jewelry - {time.Day}.{time.Month}.{time.Year}.txt");
+            this.fileWriter.WriteLine(GlobalConstants.Header);
 
-            string header = "|  Артикул  |  Грам  |  Главница  |  Цена продава  |  Онлайн  |";
-
-            using (streamWriter)
-            {
-                string dividingLine = new string('-', header.Length);
-                streamWriter.WriteLine(header);
+     
+                string dividingLine = new string(GlobalConstants.DividingLineChar, GlobalConstants.Header.Length);
+                this.fileWriter.WriteLine(dividingLine);
 
                 var counter = 0;
 
                 while (true)
                 {
-                    string input = Console.ReadLine();
+                    string input = this.reader.ReadLine();
 
                     if (input.ToLower() == "end" || input.ToLower() == "край")
                     {
                         break;
                     }
 
-                    streamWriter.WriteLine(dividingLine);
+                    this.fileWriter.WriteLine(dividingLine);
 
                     string[] args = input.Split(" ", StringSplitOptions.RemoveEmptyEntries);
                     string type = args[0];
                     double weight = double.Parse(args[1], culture);
 
-                    Jewelry jewel = new Jewelry(type, weight);
+                    IJewelry jewel = new Jewelry(type, weight);
                     jewels.Add(jewel);
 
                     string size = (args.Length == 3) ? args[2] : null;
 
-                    if (wantFolders)
-                    {
-                        string foldersPath = $@"..\Jewelry\Folders\{type} - {weight}";
+                    //if (wantFolders)
+                    //{
+                    //    string foldersPath = $@"..\Jewelry\Folders\{type} - {weight}";
 
-                        if (size != null && size.All((char c) => char.IsDigit(c)))
-                        {
-                            foldersPath += $" - {size}р-р";
-                        }
+                    //    if (size != null && size.All((char c) => char.IsDigit(c)))
+                    //    {
+                    //        foldersPath += $" - {size}р-р";
+                    //    }
 
-                        if (Directory.Exists(foldersPath))
-                        {
-                            foldersPath += $"({++counter})";
-                        }
+                    //    if (Directory.Exists(foldersPath))
+                    //    {
+                    //        foldersPath += $"({++counter})";
+                    //    }
 
-                        Directory.CreateDirectory(foldersPath);
-                    }
+                    //    Directory.CreateDirectory(foldersPath);
+                    //}
 
                     decimal price = (decimal)jewel.Weight * pricePerGram;
 
@@ -107,21 +110,21 @@ namespace GoldJewelry.Core
 
                     if (size != null && size.All((char c) => char.IsDigit(c)))
                     {
-                        streamWriter.WriteLine($"{jewel.Type} - {jewel.Weight}g({size}р) * {pricePerGram}лв. = {price:f2}лв.|{sellPrice}лв. = {sellSum:f2}лв.|{onlinePrice}лв. = {onlineSell:f2}лв.|");
+                        this.fileWriter.WriteLine($"{jewel.Type} - {jewel.Weight}g({size}р) * {pricePerGram}лв. = {price:f2}лв.|{sellPrice}лв. = {sellSum:f2}лв.|{onlinePrice}лв. = {onlineSell:f2}лв.|");
                     }
                     else
                     {
-                        streamWriter.WriteLine($"{jewel.Type} - {jewel.Weight}g * {pricePerGram}лв. = {price:f2}лв.|{sellPrice}лв. = {sellSum:f2}лв.|{onlinePrice}лв. = {onlineSell:f2}лв.|");
+                        this.fileWriter.WriteLine($"{jewel.Type} - {jewel.Weight}g * {pricePerGram}лв. = {price:f2}лв.|{sellPrice}лв. = {sellSum:f2}лв.|{onlinePrice}лв. = {onlineSell:f2}лв.|");
                     }
                 }
 
-                streamWriter.WriteLine(dividingLine);
+                this.fileWriter.WriteLine(dividingLine);
                 double totalWeight = jewels.Sum((IJewelry j) => j.Weight);
                 decimal totalSum = (decimal)totalWeight * pricePerGram;
                 string footer = $"Total weight: {totalWeight}g * {pricePerGram}лв. = {totalSum:f2}лв.";
 
-                streamWriter.WriteLine(footer);
-            }
+                this.fileWriter.WriteLine(footer);
+            
         }
     }
 }
