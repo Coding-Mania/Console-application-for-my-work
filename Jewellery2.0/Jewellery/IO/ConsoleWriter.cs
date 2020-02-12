@@ -4,7 +4,7 @@
 
     using Contracts;
 
-    public class ConsoleWriter : IWriter
+    public class ConsoleWriter : IWriter, IClearable
     {
         public void WriteLine(string value)
         {
