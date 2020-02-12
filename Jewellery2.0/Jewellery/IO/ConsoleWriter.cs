@@ -8,12 +8,17 @@
     {
         public void WriteLine(string value)
         {
-            Console.Write(value);
+            Console.WriteLine(value);
         }
 
         public void Clear()
         {
             Console.Clear();
+        }
+
+        public void Write(string value)
+        {
+            Console.Write(value);
         }
     }
 }

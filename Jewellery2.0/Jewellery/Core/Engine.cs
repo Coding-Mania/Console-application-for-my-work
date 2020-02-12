@@ -15,7 +15,7 @@ namespace GoldJewelry.Core
         public Engine(IReader reader, IWriter fileWriter, IWriter consoleWriter)
         {
             this.reader = reader;
-            this.fileWriter = writer;
+            this.fileWriter = fileWriter;
             this.consoleWriter = consoleWriter;
         }
 
@@ -26,18 +26,20 @@ namespace GoldJewelry.Core
             this.consoleWriter.WriteLine("Create folders? Y/N: ");
 
             string folderAnser = this.reader.ReadLine().ToLower();
-            this.consoleWriter.Clear();
+
+            var clearConsole = this.consoleWriter as IClearable;
+            clearConsole.Clear();
 
             bool wantFolders = (folderAnser == "y" || folderAnser == "у") ? true : false;
 
-            Console.Write("Enter price per gram: ");
-            decimal pricePerGram = decimal.Parse(Console.ReadLine(), culture);
+            this.consoleWriter.WriteLine("Enter price per gram: ");
+            decimal pricePerGram = decimal.Parse(this.reader.ReadLine());
 
-            Console.Write("Enter sell price per gram: ");
-            decimal sellPrice = decimal.Parse(Console.ReadLine(), culture);
+            this.consoleWriter.Write("Enter sell price per gram: ");
+            decimal sellPrice = decimal.Parse(this.reader.ReadLine());
 
-            Console.Write("Enter online shop sell price per gram: ");
-            decimal onlinePrice = decimal.Parse(Console.ReadLine(), culture);
+            this.consoleWriter.Write("Enter online shop sell price per gram: ");
+            decimal onlinePrice = decimal.Parse(this.reader.ReadLine());
 
             var time = DateTime.Now;
 

@@ -19,6 +19,14 @@
             this.streamWriter = new StreamWriter(path);
         }
 
+        public void Write(string value)
+        {
+            using (streamWriter)
+            {
+                streamWriter.Write(value);
+            }
+        }
+
         public void WriteLine(string value)
         {
             using (streamWriter)
