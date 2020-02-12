@@ -102,8 +102,8 @@
             }
 
             this.fileWriter.WriteLine(dividingLine);
-            double totalWeight = jewels.Sum((IJewelry j) => j.Weight);
-            decimal totalSum = (decimal)totalWeight * pricePerGram;
+            decimal totalWeight = jewels.Sum(j => (decimal)j.Weight);
+            decimal totalSum = totalWeight * pricePerGram;
 
             string footer = string.Format(GlobalConstants.Footer, totalWeight, pricePerGram, totalSum);
 
