@@ -1,7 +1,7 @@
 ﻿namespace GoldJewelry.IO.Contracts
 {
-    interface IWriter
+    public interface IWriter
     {
-        void Write(string value);
+        void WriteLine(string value);
     }
 }

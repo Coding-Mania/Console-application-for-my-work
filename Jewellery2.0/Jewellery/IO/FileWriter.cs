@@ -19,7 +19,7 @@
             this.streamWriter = new StreamWriter(path);
         }
 
-        public void Write(string value)
+        public void WriteLine(string value)
         {
             using (streamWriter)
             {
