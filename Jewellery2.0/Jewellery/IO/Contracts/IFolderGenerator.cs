@@ -1,6 +1,6 @@
 ﻿namespace GoldJewelry.IO.Contracts
 {
-    public  interface IFolderGenerator
+    public interface IFolderGenerator
     {
         void GenerateFolder(string path);
     }

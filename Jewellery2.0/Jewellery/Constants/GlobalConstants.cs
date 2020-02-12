@@ -16,10 +16,10 @@
 
         public const char DividingLineChar = '-';
 
-        public static string[] BreakingValues = { "end", "край" };
-
         public const string FoldersPath = @"..\Jewelry\Folders\{0} - {1}";
 
         public const string FoldersPathExtend = " - {0}р-р";
+
+        public static string[] BreakingValues = { "end", "край" };
     }
 }

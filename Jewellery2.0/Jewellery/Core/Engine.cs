@@ -18,7 +18,6 @@
         private readonly IWriter consoleWriter;
         private readonly IFolderGenerator folderGenerator;
 
-
         public Engine(IReader reader, IWriter fileWriter, IWriter consoleWriter, IFolderGenerator folderGenerator)
         {
             this.reader = reader;
@@ -29,7 +28,6 @@
 
         public void Run()
         {
-
             this.consoleWriter.Write(Messages.FolderMessage);
 
             string folderAnser = this.reader.ReadLine().ToLower();
@@ -47,11 +45,9 @@
             this.consoleWriter.Write(Messages.OnlineShopPricePerGramMessage);
             decimal onlinePrice = decimal.Parse(this.reader.ReadLine());
 
-
             List<IJewelry> jewels = new List<IJewelry>();
 
             this.fileWriter.WriteLine(GlobalConstants.Header);
-
 
             string dividingLine = new string(GlobalConstants.DividingLineChar, GlobalConstants.Header.Length);
             this.fileWriter.WriteLine(dividingLine);
@@ -102,7 +98,6 @@
                 {
                     string jewelInfo = string.Format(GlobalConstants.JewesInfo, jewel.Type, jewel.Weight, pricePerGram, price, sellPrice, sellSum, onlinePrice, onlineSell);
                     this.fileWriter.WriteLine(jewelInfo);
-
                 }
             }
 

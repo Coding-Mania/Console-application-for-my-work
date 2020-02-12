@@ -9,6 +9,5 @@
         public const string SellPricePerGramMessage = "Enter sell price per gram: ";
 
         public const string OnlineShopPricePerGramMessage = "Enter online shop sell price per gram: ";
-
     }
 }

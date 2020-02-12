@@ -1,11 +1,12 @@
 ﻿namespace GoldJewelry
 {
+    using System;
+
     using Constants;
     using Core;
     using Core.Contracts;
     using IO;
     using IO.Contracts;
-    using System;
 
     public static class Startup
     {

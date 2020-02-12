@@ -27,10 +27,7 @@
 
         public void Write(string value)
         {
-            using (streamWriter)
-            {
-                this.streamWriter.Write(value);
-            }
+            this.streamWriter.Write(value);
         }
 
         public void WriteLine(string value)
