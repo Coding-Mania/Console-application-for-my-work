@@ -1,6 +1,6 @@
 ﻿namespace GoldJewelry.IO.Contracts
 {
-    public  interface IReader
+    public interface IReader
     {
         string ReadLine();
     }

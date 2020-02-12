@@ -1,19 +1,30 @@
 ﻿namespace GoldJewelry.IO
 {
+    using System.IO;
+
+    using Constants;
     using Contracts;
 
     public class FileWriter : IWriter
     {
+        private readonly StreamWriter streamWriter;
+
         public FileWriter(string path)
         {
-            this.Path = path;
+            if (!Directory.Exists(GlobalConstants.TextFilePath))
+            {
+                Directory.CreateDirectory(GlobalConstants.TextFilePath);
+            }
+
+            this.streamWriter = new StreamWriter(path);
         }
 
-        public void Write()
+        public void Write(string value)
         {
-
+            using (streamWriter)
+            {
+                streamWriter.WriteLine(value);
+            }
         }
-
-        public string Path { get; private set; }
     }
 }
