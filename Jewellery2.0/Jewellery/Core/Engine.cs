@@ -7,23 +7,26 @@ namespace GoldJewelry.Core
 
     public class Engine : IEngine
     {
-        private  IReader reader;
-        private  IWriter writer;
+        private readonly IReader reader;
+        private readonly IWriter fileWriter;
+        private readonly IWriter consoleWriter;
 
-        public Engine(IReader reader, IWriter writer)
+
+        public Engine(IReader reader, IWriter fileWriter, IWriter consoleWriter)
         {
             this.reader = reader;
-            this.writer = writer;
+            this.fileWriter = writer;
+            this.consoleWriter = consoleWriter;
         }
 
         public void Run()
         {
             CultureInfo culture = CultureInfo.CurrentCulture;
 
-            Console.WriteLine("Create folders? Y/N: ");
+            this.consoleWriter.WriteLine("Create folders? Y/N: ");
 
-            string folderAnser = Console.ReadLine().ToLower();
-            Console.Clear();
+            string folderAnser = this.reader.ReadLine().ToLower();
+            this.consoleWriter.Clear();
 
             bool wantFolders = (folderAnser == "y" || folderAnser == "у") ? true : false;
 
