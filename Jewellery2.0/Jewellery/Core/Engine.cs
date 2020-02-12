@@ -1,14 +1,15 @@
 ﻿namespace GoldJewelry.Core
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
     using Constants;
     using Contracts;
     using IO.Contracts;
     using Messages;
     using Models;
     using Models.Contracts;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
 
     public class Engine : IEngine
     {
@@ -77,11 +78,11 @@
 
                 if (wantFolders)
                 {
-                    string foldersPath = $@"..\Jewelry\Folders\{type} - {weight}";
+                    string foldersPath = string.Format(GlobalConstants.FoldersPath, type, weight);
 
                     if (size != null && size.All((char c) => char.IsDigit(c)))
                     {
-                        foldersPath += $" - {size}р-р";
+                        foldersPath += string.Format(GlobalConstants.FoldersPathExtend, size);
                     }
 
                     this.folderGenerator.GenerateFolder(foldersPath);
@@ -94,8 +95,8 @@
 
                 if (size != null && size.All((char c) => char.IsDigit(c)))
                 {
-
-                    this.fileWriter.WriteLine($"{jewel.Type} - {jewel.Weight}g({size}р) * {pricePerGram}лв. = {price:f2}лв.|{sellPrice}лв. = {sellSum:f2}лв.|{onlinePrice}лв. = {onlineSell:f2}лв.|");
+                    string jewelInfo = string.Format(GlobalConstants.JewesInfoExtend, jewel.Type, jewel.Weight, size, pricePerGram, price, sellPrice, sellSum, onlinePrice, onlineSell);
+                    this.fileWriter.WriteLine(jewelInfo);
                 }
                 else
                 {
