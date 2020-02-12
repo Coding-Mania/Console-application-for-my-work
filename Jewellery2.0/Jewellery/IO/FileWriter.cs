@@ -21,6 +21,7 @@
 
         public void Clear()
         {
+            this.streamWriter.Flush();
             this.streamWriter.Close();
         }
 
@@ -28,7 +29,7 @@
         {
             using (streamWriter)
             {
-                streamWriter.Write(value);
+                this.streamWriter.Write(value);
             }
         }
 

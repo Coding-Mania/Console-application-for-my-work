@@ -2,7 +2,9 @@
 {
     using System.IO;
 
-    public class FolderGenerator
+    using Contracts;
+
+    public class FolderGenerator : IFolderGenerator
     {
         private int counter;
 

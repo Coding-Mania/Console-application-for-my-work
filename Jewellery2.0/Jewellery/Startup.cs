@@ -1,10 +1,10 @@
 ﻿namespace GoldJewelry
 {
+    using Constants;
     using Core;
     using Core.Contracts;
-    using GoldJewelry.Constants;
-    using GoldJewelry.IO;
-    using GoldJewelry.IO.Contracts;
+    using IO;
+    using IO.Contracts;
     using System;
 
     public static class Startup
@@ -18,8 +18,9 @@
             IReader reader = new ConsoleReder();
             IWriter consoleWriter = new ConsoleWriter();
             IWriter fileWriter = new FileWriter(path);
+            IFolderGenerator folderGenerator = new FolderGenerator();
 
-            IEngine engine = new Engine(reader, fileWriter, consoleWriter);
+            IEngine engine = new Engine(reader, fileWriter, consoleWriter, folderGenerator);
 
             engine.Run();
         }
