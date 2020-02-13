@@ -1,5 +1,6 @@
 ﻿namespace GoldJewelry.IO
 {
+    using System;
     using System.IO;
 
     using Constants;
@@ -9,14 +10,14 @@
     {
         private readonly StreamWriter streamWriter;
 
-        public FileWriter(string path)
+        public FileWriter()
         {
             if (!Directory.Exists(GlobalConstants.TextFilePath))
             {
                 Directory.CreateDirectory(GlobalConstants.TextFilePath);
             }
 
-            this.streamWriter = new StreamWriter(path);
+            this.streamWriter = new StreamWriter(this.GetPath());
         }
 
         public void Clear()
@@ -33,6 +34,15 @@
         public void WriteLine(string value)
         {
             this.streamWriter.WriteLine(value);
+        }
+
+        private string GetPath()
+        {
+            var time = DateTime.Now;
+
+            var path = string.Format(GlobalConstants.TextFileFullPath, time.Day, time.Month, time.Year);
+
+            return path;
         }
     }
 }

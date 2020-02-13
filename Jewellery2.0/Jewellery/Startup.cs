@@ -1,8 +1,5 @@
 ﻿namespace GoldJewelry
 {
-    using System;
-
-    using Constants;
     using Core;
     using Core.Contracts;
     using IO;
@@ -12,13 +9,9 @@
     {
         public static void Main()
         {
-            var time = DateTime.Now;
-
-            var path = string.Format(GlobalConstants.TextFileFullPath, time.Day, time.Month, time.Year);
-
             IReader reader = new ConsoleReader();
             IWriter consoleWriter = new ConsoleWriter();
-            IWriter fileWriter = new FileWriter(path);
+            IWriter fileWriter = new FileWriter();
             IFolderGenerator folderGenerator = new FolderGenerator();
 
             IEngine engine = new Engine(reader, fileWriter, consoleWriter, folderGenerator);
