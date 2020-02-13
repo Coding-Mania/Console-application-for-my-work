@@ -16,7 +16,7 @@
 
             var path = string.Format(GlobalConstants.TextFileFullPath, time.Day, time.Month, time.Year);
 
-            IReader reader = new ConsoleReder();
+            IReader reader = new ConsoleReader();
             IWriter consoleWriter = new ConsoleWriter();
             IWriter fileWriter = new FileWriter(path);
             IFolderGenerator folderGenerator = new FolderGenerator();
