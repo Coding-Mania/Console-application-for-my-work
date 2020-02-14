@@ -17,14 +17,16 @@
         private readonly IWriter consoleWriter;
         private readonly IFolderGenerator folderGenerator;
         private readonly IJewelryFactory jewelryFactory;
+        private ICollection<IJewelry> jewelries;
 
-        public Engine(IReader reader, IWriter fileWriter, IWriter consoleWriter, IFolderGenerator folderGenerator, IJewelryFactory jewelryFactory)
+        public Engine(IReader reader, IWriter fileWriter, IWriter consoleWriter, IFolderGenerator folderGenerator, IJewelryFactory jewelryFactory, ICollection<IJewelry> jewelries)
         {
             this.reader = reader;
             this.fileWriter = fileWriter;
             this.consoleWriter = consoleWriter;
             this.folderGenerator = folderGenerator;
             this.jewelryFactory = jewelryFactory;
+            this.jewelries = jewelries;
         }
 
         public void Run()
@@ -45,8 +47,6 @@
 
             this.consoleWriter.Write(GlobalConstants.OnlineShopPricePerGramMessage);
             decimal onlinePrice = decimal.Parse(this.reader.ReadLine());
-
-            List<IJewelry> jewels = new List<IJewelry>();
 
             this.fileWriter.WriteLine(GlobalConstants.Header);
 
@@ -69,7 +69,7 @@
                 double weight = double.Parse(args[1]);
 
                 IJewelry jewel = this.jewelryFactory.GetJewelry(type, weight);
-                jewels.Add(jewel);
+                this.jewelries.Add(jewel);
 
                 string size = (args.Length == 3) ? args[2] : null;
 
@@ -103,7 +103,7 @@
             }
 
             this.fileWriter.WriteLine(dividingLine);
-            decimal totalWeight = jewels.Sum(j => (decimal)j.Weight);
+            decimal totalWeight = this.jewelries.Sum(j => (decimal)j.Weight);
             decimal totalSum = totalWeight * pricePerGram;
 
             string footer = string.Format(GlobalConstants.Footer, totalWeight, pricePerGram, totalSum);
