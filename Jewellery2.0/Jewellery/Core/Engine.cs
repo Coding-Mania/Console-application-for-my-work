@@ -8,7 +8,6 @@
     using Contracts;
     using GoldJewelry.Models.Factory.Contracts;
     using IO.Contracts;
-    using Models;
     using Models.Contracts;
 
     public class Engine : IEngine
