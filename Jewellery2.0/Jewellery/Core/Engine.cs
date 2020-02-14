@@ -6,7 +6,7 @@
 
     using Constants;
     using Contracts;
-    using GoldJewelry.Models.Factory.Contracts;
+    using Models.Factory.Contracts;
     using IO.Contracts;
     using Models.Contracts;
 
