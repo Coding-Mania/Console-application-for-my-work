@@ -17,7 +17,7 @@
         private readonly IWriter consoleWriter;
         private readonly IFolderGenerator folderGenerator;
         private readonly IJewelryFactory jewelryFactory;
-        private ICollection<IJewelry> jewelries;
+        private readonly ICollection<IJewelry> jewelries;
 
         public Engine(IReader reader, IWriter fileWriter, IWriter consoleWriter, IFolderGenerator folderGenerator, IJewelryFactory jewelryFactory, ICollection<IJewelry> jewelries)
         {
