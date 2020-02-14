@@ -6,6 +6,7 @@
 
     using Constants;
     using Contracts;
+    using GoldJewelry.Models.Factory.Contracts;
     using IO.Contracts;
     using Models;
     using Models.Contracts;
@@ -16,13 +17,15 @@
         private readonly IWriter fileWriter;
         private readonly IWriter consoleWriter;
         private readonly IFolderGenerator folderGenerator;
+        private readonly IJewelryFactory jewelryFactory;
 
-        public Engine(IReader reader, IWriter fileWriter, IWriter consoleWriter, IFolderGenerator folderGenerator)
+        public Engine(IReader reader, IWriter fileWriter, IWriter consoleWriter, IFolderGenerator folderGenerator, IJewelryFactory jewelryFactory)
         {
             this.reader = reader;
             this.fileWriter = fileWriter;
             this.consoleWriter = consoleWriter;
             this.folderGenerator = folderGenerator;
+            this.jewelryFactory = jewelryFactory;
         }
 
         public void Run()
@@ -66,7 +69,7 @@
                 string type = args[0];
                 double weight = double.Parse(args[1]);
 
-                IJewelry jewel = new Jewelry(type, weight);
+                IJewelry jewel = this.jewelryFactory.GetJewelry(type, weight);
                 jewels.Add(jewel);
 
                 string size = (args.Length == 3) ? args[2] : null;
