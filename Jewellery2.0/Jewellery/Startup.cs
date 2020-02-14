@@ -1,13 +1,14 @@
 ﻿namespace GoldJewelry
 {
+    using System.Collections.Generic;
+
     using Core;
     using Core.Contracts;
-    using GoldJewelry.Models.Contracts;
-    using GoldJewelry.Models.Factory;
-    using GoldJewelry.Models.Factory.Contracts;
     using IO;
     using IO.Contracts;
-    using System.Collections.Generic;
+    using Models.Contracts;
+    using Models.Factory;
+    using Models.Factory.Contracts;
 
     public static class Startup
     {
