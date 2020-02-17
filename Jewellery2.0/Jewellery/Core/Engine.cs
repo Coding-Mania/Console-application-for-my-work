@@ -17,11 +17,11 @@
         private readonly IWriter consoleWriter;
         private readonly IFolderGenerator folderGenerator;
 
-        public Engine(IReader reader, IWriter fileWriter, IWriter consoleWriter, IFolderGenerator folderGenerator)
+        public Engine(IReader reader, IEnumerable<IWriter> writers, IFolderGenerator folderGenerator)
         {
             this.reader = reader;
-            this.fileWriter = fileWriter;
-            this.consoleWriter = consoleWriter;
+            this.fileWriter = writers.ElementAt(0);
+            this.consoleWriter = writers.ElementAt(1);
             this.folderGenerator = folderGenerator;
         }
 
@@ -55,7 +55,7 @@
             {
                 string input = this.reader.ReadLine();
 
-                if (GlobalConstants.BreakingValues.Contains(input.ToLower()))
+                if (GlobalConstants.BreakingFirstValue == input.ToLower() || GlobalConstants.BreakingSecondValue == input.ToLower())
                 {
                     break;
                 }

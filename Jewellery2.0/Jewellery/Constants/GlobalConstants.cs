@@ -20,8 +20,6 @@
 
         public const string FoldersPathExtend = " - {0}р-р";
 
-        public static string[] BreakingValues = { "end", "край" };
-
         public const string FolderMessage = "Create folders? Y/N: ";
 
         public const string PricePerGramMessage = "Enter price per gram: ";
@@ -29,5 +27,9 @@
         public const string SellPricePerGramMessage = "Enter sell price per gram: ";
 
         public const string OnlineShopPricePerGramMessage = "Enter online shop sell price per gram: ";
+
+        public const string BreakingFirstValue = "end";
+
+        public const string BreakingSecondValue = "край";
     }
 }
