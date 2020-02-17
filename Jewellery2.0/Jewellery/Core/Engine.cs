@@ -19,11 +19,7 @@
         private readonly IJewelryFactory jewelryFactory;
         private readonly ICollection<IJewelry> jewelries;
 
-<<<<<<< HEAD
-        public Engine(IReader reader, IEnumerable<IWriter> writers, IFolderGenerator folderGenerator)
-=======
-        public Engine(IReader reader, IWriter fileWriter, IWriter consoleWriter, IFolderGenerator folderGenerator, IJewelryFactory jewelryFactory, ICollection<IJewelry> jewelries)
->>>>>>> 12b5a387ee73c897be9e3e81e10d85edfad50c29
+        public Engine(IReader reader, IEnumerable<IWriter> writers, IFolderGenerator folderGenerator, IJewelryFactory jewelryFactory, ICollection<IJewelry> jewelries)
         {
             this.reader = reader;
             this.fileWriter = writers.ElementAt(0);
