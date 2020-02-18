@@ -1,16 +1,17 @@
 ﻿namespace GoldJewelry
 {
+    using Microsoft.Extensions.DependencyInjection;
     using System;
     using System.Collections.Generic;
+
     using Core;
     using Core.Contracts;
-    using GoldJewelry.Models;
-    using GoldJewelry.Models.Contracts;
-    using GoldJewelry.Models.Factory;
-    using GoldJewelry.Models.Factory.Contracts;
     using IO;
     using IO.Contracts;
-    using Microsoft.Extensions.DependencyInjection;
+    using Models;
+    using Models.Contracts;
+    using Models.Factory;
+    using Models.Factory.Contracts;
 
     public static class Startup
     {
