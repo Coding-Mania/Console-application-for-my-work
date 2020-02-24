@@ -12,6 +12,8 @@
     using Models.Contracts;
     using Models.Factory;
     using Models.Factory.Contracts;
+    using GoldJewelry.Repository;
+    using GoldJewelry.Repository.Contracts;
 
     public static class Startup
     {
@@ -35,6 +37,7 @@
             serviceCollection.AddTransient<IJewelry, Jewelry>();
             serviceCollection.AddTransient<IJewelryFactory, JewelryFactory>();
             serviceCollection.AddSingleton<ICollection<IJewelry>>(new List<IJewelry>());
+            serviceCollection.AddTransient<IJewelryRepository, JewelryRepository>();
             serviceCollection.AddTransient<IEngine, Engine>();
 
             var serviceProvider = serviceCollection.BuildServiceProvider();

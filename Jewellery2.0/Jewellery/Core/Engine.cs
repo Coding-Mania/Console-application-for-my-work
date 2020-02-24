@@ -6,9 +6,9 @@
 
     using Constants;
     using Contracts;
-    using Models.Factory.Contracts;
     using IO.Contracts;
-    using Models.Contracts;
+    using Models.Factory.Contracts;
+    using Repository.Contracts;
 
     public class Engine : IEngine
     {
@@ -17,9 +17,9 @@
         private readonly IWriter consoleWriter;
         private readonly IFolderGenerator folderGenerator;
         private readonly IJewelryFactory jewelryFactory;
-        private readonly ICollection<IJewelry> jewelries;
+        private readonly IJewelryRepository jewelries;
 
-        public Engine(IReader reader, IEnumerable<IWriter> writers, IFolderGenerator folderGenerator, IJewelryFactory jewelryFactory, ICollection<IJewelry> jewelries)
+        public Engine(IReader reader, IEnumerable<IWriter> writers, IFolderGenerator folderGenerator, IJewelryFactory jewelryFactory, IJewelryRepository jewelries)
         {
             this.reader = reader;
             this.fileWriter = writers.ElementAt(0);
@@ -103,7 +103,7 @@
             }
 
             this.fileWriter.WriteLine(dividingLine);
-            var totalWeight = this.jewelries.Sum(j => (decimal)j.Weight);
+            var totalWeight = this.jewelries.TotalWeight;
             var totalSum = totalWeight * pricePerGram;
 
             var footer = string.Format(GlobalConstants.Footer, totalWeight, pricePerGram, totalSum);
