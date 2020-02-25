@@ -41,7 +41,6 @@
 
             this.consoleWriter.Write(GlobalConstants.PricePerGramMessage);
             var pricePerGram = decimal.Parse(this.reader.ReadLine());
-            this.jewelries.PricePerGram = pricePerGram;
 
             this.consoleWriter.Write(GlobalConstants.SellPricePerGramMessage);
             var sellPrice = decimal.Parse(this.reader.ReadLine());
@@ -104,8 +103,10 @@
             }
 
             this.fileWriter.WriteLine(dividingLine);
+
+            var totalSum = this.jewelries.TotalWeight * pricePerGram;
        
-            var footer = string.Format(GlobalConstants.Footer, this.jewelries.TotalWeight, this.jewelries.PricePerGram, this.jewelries.TotalSum);
+            var footer = string.Format(GlobalConstants.Footer, this.jewelries.TotalWeight, pricePerGram, totalSum);
 
             this.fileWriter.WriteLine(footer);
             (this.fileWriter as IClearable).Clear();

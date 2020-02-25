@@ -17,10 +17,6 @@
 
         public decimal TotalWeight => (decimal)jewelries.Sum(j => j.Weight);
 
-        public decimal PricePerGram { get; set; }
-
-        public decimal TotalSum => this.TotalWeight * this.PricePerGram;
-
         public void Add(IJewelry jewel) => this.jewelries.Add(jewel);
     }
 }
