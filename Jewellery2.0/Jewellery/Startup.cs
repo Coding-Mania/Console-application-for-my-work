@@ -1,6 +1,5 @@
 ﻿namespace GoldJewelry
 {
-    using Microsoft.Extensions.DependencyInjection;
     using System;
     using System.Collections.Generic;
 
@@ -8,12 +7,13 @@
     using Core.Contracts;
     using IO;
     using IO.Contracts;
+    using Microsoft.Extensions.DependencyInjection;
     using Models;
     using Models.Contracts;
     using Models.Factory;
     using Models.Factory.Contracts;
-    using GoldJewelry.Repository;
-    using GoldJewelry.Repository.Contracts;
+    using Repository;
+    using Repository.Contracts;
 
     public static class Startup
     {
