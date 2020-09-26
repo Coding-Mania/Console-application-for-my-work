@@ -1,4 +1,4 @@
 configuration: Release
 
 before build:
- - dotnet restore
+ - cmd: dotnet restore
