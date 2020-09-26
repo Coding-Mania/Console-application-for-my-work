@@ -2,5 +2,5 @@ configuration: Release
 before_build:
 - cmd: dotnet restore
 build:
-  project: Jewellery2.0/GoldJewelry.sln
+  project: Console-application-for-my-work/blob/master/Jewellery2.0/GoldJewelry.sln
   verbosity: minimal
