@@ -10,5 +10,5 @@ clone_depth: 1
 before_build:
 - cmd: dotnet restore
 build:
-  project: GJewellery2.0/GoldJewelry.sln
+  project: Jewellery2.0/GoldJewelry.sln
   verbosity: minimal
