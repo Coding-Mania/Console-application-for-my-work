@@ -1,7 +1,5 @@
-image: Visual Studio 2019
 configuration: Release
-before_build:
-- cmd: dotnet restore
-build:
-  project: Console-application-for-my-work/Jewellery2.0/GoldJewelry.sln
-  verbosity: minimal
+
+# restore NuGet packages before running MSBuild
+before build:
+ - nuget restore
