@@ -10,6 +10,8 @@
 
         public const string Html = "<html>\r\n<head>\r\n<link rel=\"stylesheet\" href=\"styles.css\">\r\n</head>\r\n<body><h1>Таблица</h1>";
 
+        public const string EndHtml = "</table></body>\r\n</html>";
+
         public const string FoldersPath = @"..\Jewelry\Folders\{0} - {1}";
 
         public const string FoldersPathExtend = " - {0}р-р";
