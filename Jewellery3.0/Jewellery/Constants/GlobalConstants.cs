@@ -6,7 +6,7 @@
 
         public const string TextFileFullPath = @"..\Jewelry\Jewelry - {0}.{1}.{2}.html";
 
-        public const string TableHead = " <table class=\"table center\">\r\n<tr>\r\n<th>Артикул</th>\r\n<th>Грам</th>\r\n<th>Главница закръглена!</th>\r\n\t<th>Цена продава закръглена!</th>\r\n</tr>";
+        public const string TableHead = " <table class=\"table center\">\r\n<tr>\r\n<th>Артикул</th>\r\n<th>Грамаж</th>\r\n<th>Главница закръглена!</th>\r\n\t<th>Цена продава закръглена!</th>\r\n</tr>";
 
         public const string Html = "<html>\r\n<head>\r\n<link rel=\"stylesheet\" href=\"styles.css\">\r\n</head>\r\n<body><h1>Таблица</h1>";
 
