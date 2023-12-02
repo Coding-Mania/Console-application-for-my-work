@@ -45,13 +45,8 @@
             this.consoleWriter.Write(GlobalConstants.SellPricePerGramMessage);
             var sellPrice = decimal.Parse(this.reader.ReadLine());
 
-            this.consoleWriter.Write(GlobalConstants.OnlineShopPricePerGramMessage);
-            var onlinePrice = decimal.Parse(this.reader.ReadLine());
-
-            this.fileWriter.WriteLine(GlobalConstants.Header);
-
-            var dividingLine = new string(GlobalConstants.DividingLineChar, GlobalConstants.Header.Length);
-            this.fileWriter.WriteLine(dividingLine);
+            this.fileWriter.WriteLine(GlobalConstants.Html);
+            this.fileWriter.WriteLine(GlobalConstants.TableHead);
 
             while (true)
             {
@@ -61,8 +56,6 @@
                 {
                     break;
                 }
-
-                this.fileWriter.WriteLine(dividingLine);
 
                 var args = input.Split(" ", StringSplitOptions.RemoveEmptyEntries);
                 var type = args[0];
@@ -85,30 +78,18 @@
                     this.folderGenerator.GenerateFolder(foldersPath);
                 }
 
-                var price = (decimal)jewel.Weight * pricePerGram;
+                var price = Math.Round((decimal)jewel.Weight * pricePerGram);
 
                 var sellSum = Math.Round((decimal)jewel.Weight * sellPrice);
-                var onlineSell = Math.Round((decimal)jewel.Weight * onlinePrice);
 
-                if (size != null && size.All((char c) => char.IsDigit(c)))
-                {
-                    var jewelInfo = string.Format(GlobalConstants.JewelsInfoExtend, jewel.Type, jewel.Weight, size, pricePerGram, price, sellPrice, sellSum, onlinePrice, onlineSell);
-                    this.fileWriter.WriteLine(jewelInfo);
-                }
-                else
-                {
-                    var jewelInfo = string.Format(GlobalConstants.JewelsInfo, jewel.Type, jewel.Weight, pricePerGram, price, sellPrice, sellSum, onlinePrice, onlineSell);
-                    this.fileWriter.WriteLine(jewelInfo);
-                }
+                this.fileWriter.WriteLine($"<tr>\r\n<td>{jewel.Type}</td>\r\n<td>{jewel.Weight}гр.</td>\r\n<td>* {pricePerGram} = {price}лв.</td>\r\n<td>* {sellPrice} = {sellSum}лв</td>\r\n<td><input type=\"checkbox\"></td></tr>");
             }
 
-            this.fileWriter.WriteLine(dividingLine);
+            var totalSum = Math.Round(this.jewelries.TotalWeight * pricePerGram);
 
-            var totalSum = this.jewelries.TotalWeight * pricePerGram;
-       
-            var footer = string.Format(GlobalConstants.Footer, this.jewelries.TotalWeight, pricePerGram, totalSum);
+            this.fileWriter.WriteLine($"<td colspan=\"4\">Общ грамаж: {this.jewelries.TotalWeight}/гр. * {pricePerGram} = {totalSum}лв. - сумата е закръглена до най-близкото кръгло число!</td></tr>");
+            this.fileWriter.WriteLine("</table></body>\r\n</html>");
 
-            this.fileWriter.WriteLine(footer);
             (this.fileWriter as IClearable).Clear();
         }
     }
