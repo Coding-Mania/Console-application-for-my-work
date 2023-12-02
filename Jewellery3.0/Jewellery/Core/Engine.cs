@@ -87,7 +87,8 @@
 
             var totalSum = Math.Round(this.jewelries.TotalWeight * pricePerGram);
 
-            this.fileWriter.WriteLine($"<td colspan=\"4\" style=\"font-weight:bold\">Общ грамаж: {this.jewelries.TotalWeight}/гр. * {pricePerGram} = {totalSum}лв. | Всички суми са закръглени до най-близкото кръгло число!</td></tr>");
+            this.fileWriter.WriteLine($"<tr><td colspan=\"4\" style=\"font-weight:bold\">Общ грамаж: {this.jewelries.TotalWeight}/гр. * {pricePerGram} = {totalSum}лв.</td></tr>");
+            this.fileWriter.WriteLine($"<tr><td colspan=\"4\" style=\"font-weight:bold\">Всички суми са закръглени до най-близкото кръгло число!</td></tr>");
             this.fileWriter.WriteLine("</table></body>\r\n</html>");
 
             (this.fileWriter as IClearable).Clear();
