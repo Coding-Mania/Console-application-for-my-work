@@ -31,8 +31,9 @@
             var serviceCollection = new ServiceCollection();
 
             serviceCollection.AddTransient<IReader, ConsoleReader>();
-            serviceCollection.AddSingleton<IWriter, FileWriter>();
+            serviceCollection.AddSingleton<IWriter, HtmlWriter>();
             serviceCollection.AddTransient<IWriter, ConsoleWriter>();
+            serviceCollection.AddSingleton<IWriter, CssWriter>();
             serviceCollection.AddTransient<IFolderGenerator, FolderGenerator>();
             serviceCollection.AddTransient<IJewelry, Jewelry>();
             serviceCollection.AddTransient<IJewelryFactory, JewelryFactory>();

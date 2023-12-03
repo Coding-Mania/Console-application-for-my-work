@@ -14,6 +14,7 @@
     {
         private readonly IReader reader;
         private readonly IWriter fileWriter;
+        private readonly IWriter cssWriter;
         private readonly IWriter consoleWriter;
         private readonly IFolderGenerator folderGenerator;
         private readonly IJewelryFactory jewelryFactory;
@@ -24,6 +25,7 @@
             this.reader = reader;
             this.fileWriter = writers.ElementAt(0);
             this.consoleWriter = writers.ElementAt(1);
+            this.cssWriter = writers.ElementAt(2);
             this.folderGenerator = folderGenerator;
             this.jewelryFactory = jewelryFactory;
             this.jewelries = jewelries;
@@ -90,8 +92,10 @@
             this.fileWriter.WriteLine($"<tr><td colspan=\"4\" style=\"font-weight:bold\">Общ грамаж: {this.jewelries.TotalWeight}/гр. * {pricePerGram} = {totalSum}лв.</td></tr>");
             this.fileWriter.WriteLine($"<tr><td colspan=\"4\" style=\"font-weight:bold\">Всички суми са закръглени до най-близкото кръгло число!</td></tr>");
             this.fileWriter.WriteLine(GlobalConstants.EndHtml);
+            this.cssWriter.WriteLine(GlobalConstants.CssContent);
 
             (this.fileWriter as IClearable).Clear();
+            (this.cssWriter as IClearable).Clear();
         }
     }
 }

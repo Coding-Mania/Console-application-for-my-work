@@ -6,15 +6,15 @@
     using Constants;
     using Contracts;
 
-    public class FileWriter : IWriter, IClearable
+    public class HtmlWriter : IWriter, IClearable
     {
         private readonly StreamWriter streamWriter;
 
-        public FileWriter()
+        public HtmlWriter()
         {
-            if (!Directory.Exists(GlobalConstants.TextFilePath))
+            if (!Directory.Exists(GlobalConstants.HtmlFilePath))
             {
-                Directory.CreateDirectory(GlobalConstants.TextFilePath);
+                Directory.CreateDirectory(GlobalConstants.HtmlFilePath);
             }
 
             this.streamWriter = new StreamWriter(this.GetPath());
@@ -40,7 +40,7 @@
         {
             var time = DateTime.Now;
 
-            var path = string.Format(GlobalConstants.TextFileFullPath, time.Day, time.Month, time.Year);
+            var path = string.Format(GlobalConstants.HtmlFileFullPath, time.Day, time.Month, time.Year);
 
             return path;
         }
