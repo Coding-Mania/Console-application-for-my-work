@@ -61,34 +61,42 @@
                     break;
                 }
 
-                var args = input.Split(" ", StringSplitOptions.RemoveEmptyEntries);
-                var type = args[0];
-                var weight = double.Parse(args[1]);
-
-                var jewel = this.jewelryFactory.GetJewelry(type, weight);
-                this.jewelries.Add(jewel);
-
-                var size = (args.Length == 3) ? args[2] : null;
-
-                if (wantFolders)
+                try
                 {
-                    var foldersPath = string.Format(GlobalConstants.FoldersPath, type, weight);
+                    var args = input.Split(" ", StringSplitOptions.RemoveEmptyEntries);
+                    var type = args[0];
+                    var weight = double.Parse(args[1]);
 
-                    if (size != null && size.All((char c) => char.IsDigit(c)))
+                    var jewel = this.jewelryFactory.GetJewelry(type, weight);
+                    this.jewelries.Add(jewel);
+
+                    var size = (args.Length == 3) ? args[2] : null;
+
+                    if (wantFolders)
                     {
-                        foldersPath += string.Format(GlobalConstants.FoldersPathExtend, size);
+                        var foldersPath = string.Format(GlobalConstants.FoldersPath, type, weight);
+
+                        if (size != null && size.All((char c) => char.IsDigit(c)))
+                        {
+                            foldersPath += string.Format(GlobalConstants.FoldersPathExtend, size);
+                        }
+
+                        this.folderGenerator.GenerateFolder(foldersPath);
                     }
 
-                    this.folderGenerator.GenerateFolder(foldersPath);
+                    var price = Math.Round((decimal)jewel.Weight * pricePerGram);
+
+                    var sellSum = Math.Round((decimal)jewel.Weight * sellPrice);
+
+                    this.fileWriter
+                        .WriteLine($"<tr>\r\n<td>{jewel.Type}</td>\r\n<td>{jewel.Weight}гр.</td>\r\n<td>{price}лв.</td>\r\n<td>{sellSum}лв</td>\r\n<td><input type=\"checkbox\"></td></tr>");
                 }
-
-                var price = Math.Round((decimal)jewel.Weight * pricePerGram);
-
-                var sellSum = Math.Round((decimal)jewel.Weight * sellPrice);
-
-                this.fileWriter.WriteLine($"<tr>\r\n<td>{jewel.Type}</td>\r\n<td>{jewel.Weight}гр.</td>\r\n<td>{price}лв.</td>\r\n<td>{sellSum}лв</td>\r\n<td><input type=\"checkbox\"></td></tr>");
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Please enter valid data!!!");
+                    Console.WriteLine(ex.Message);
+                }
             }
-
             var totalSum = Math.Round(this.jewelries.TotalWeight * pricePerGram);
 
             this.fileWriter.WriteLine($"<tr><td colspan=\"4\" style=\"font-weight:bold\">Общ грамаж: {this.jewelries.TotalWeight}/гр. * {pricePerGram}лв. = {totalSum}лв.</td></tr>");
