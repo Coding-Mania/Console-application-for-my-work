@@ -89,7 +89,7 @@
                     var sellSum = Math.Round((decimal)jewel.Weight * sellPrice);
 
                     this.fileWriter
-                        .WriteLine($"<tr>\r\n<td>{jewel.Type}</td>\r\n<td>{jewel.Weight}гр.</td>\r\n<td>{price}лв.</td>\r\n<td>{sellSum}лв</td>\r\n<td><input type=\"checkbox\"></td></tr>");
+                        .WriteLine(String.Format(GlobalConstants.JewelDetail, jewel.Type, jewel.Weight, price, sellSum));
                 }
                 catch (Exception ex)
                 {
@@ -97,10 +97,11 @@
                     Console.WriteLine(ex.Message);
                 }
             }
+
             var totalSum = Math.Round(this.jewelries.TotalWeight * pricePerGram);
 
-            this.fileWriter.WriteLine($"<tr><td colspan=\"4\" style=\"font-weight:bold\">Общ грамаж: {this.jewelries.TotalWeight}/гр. * {pricePerGram}лв. = {totalSum}лв.</td></tr>");
-            this.fileWriter.WriteLine($"<tr><td colspan=\"4\" style=\"font-weight:bold\">Всички суми са закръглени до най-близкото кръгло число!</td></tr>");
+            this.fileWriter.WriteLine(String.Format(GlobalConstants.GeneralInformation, this.jewelries.TotalWeight, pricePerGram, totalSum));
+            this.fileWriter.WriteLine(GlobalConstants.LastRow);
             this.fileWriter.WriteLine(GlobalConstants.EndHtml);
             this.cssWriter.WriteLine(GlobalConstants.CssContent);
 
