@@ -4,6 +4,6 @@
 
     public interface IJewelryFactory
     {
-        IJewelry GetJewelry(string type, double weigth);
+        IJewelry GetJewelry(string type, double weigth, decimal price, string size);
     }
 }

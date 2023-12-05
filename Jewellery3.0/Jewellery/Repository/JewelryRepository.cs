@@ -15,8 +15,15 @@
             this.jewelries = jewelries;
         }
 
-        public decimal TotalWeight => (decimal)jewelries.Sum(j => j.Weight);
+        public double TotalWeight => jewelries.Sum(j => j.Weight);
+
+        public decimal TotalSum => jewelries.Sum(j => j.Price);
 
         public void Add(IJewelry jewel) => this.jewelries.Add(jewel);
+
+        public ICollection<IJewelry> GetJewelries()
+        {
+            return this.jewelries;
+        }
     }
 }

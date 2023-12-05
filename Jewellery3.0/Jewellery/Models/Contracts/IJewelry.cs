@@ -2,8 +2,12 @@
 {
     public interface IJewelry
     {
+        string Type { get; }
+
         double Weight { get; }
 
-        string Type { get; }
+        decimal Price { get; }
+
+        string Size { get; }
     }
 }

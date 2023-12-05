@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
 
     using Constants;
@@ -67,10 +68,12 @@
                     var type = args[0];
                     var weight = double.Parse(args[1]);
 
-                    var jewel = this.jewelryFactory.GetJewelry(type, weight);
+                    var price = Math.Round((decimal)double.Parse(args[1]) * pricePerGram);
+                    var size = (args.Length == 3) ? args[2] : null;
+
+                    var jewel = this.jewelryFactory.GetJewelry(type, weight, price, size);
                     this.jewelries.Add(jewel);
 
-                    var size = (args.Length == 3) ? args[2] : null;
 
                     if (wantFolders)
                     {
@@ -83,13 +86,6 @@
 
                         this.folderGenerator.GenerateFolder(foldersPath);
                     }
-
-                    var price = Math.Round((decimal)jewel.Weight * pricePerGram);
-
-                    var sellSum = Math.Round((decimal)jewel.Weight * sellPrice);
-
-                    this.fileWriter
-                        .WriteLine(String.Format(GlobalConstants.JewelDetail, jewel.Type, jewel.Weight, price, sellSum));
                 }
                 catch (Exception ex)
                 {
@@ -98,9 +94,21 @@
                 }
             }
 
-            var totalSum = Math.Round(this.jewelries.TotalWeight * pricePerGram);
+            foreach (var jewel in this.jewelries.GetJewelries())
+            {
+                var jewelSellPrice = Math.Round((decimal)jewel.Weight * sellPrice);
 
-            this.fileWriter.WriteLine(String.Format(GlobalConstants.GeneralInformation, this.jewelries.TotalWeight, pricePerGram, totalSum));
+                if (jewel.Size != null)
+                {
+                    this.fileWriter.WriteLine(String.Format(GlobalConstants.JewelDetailWithSize, jewel.Type, jewel.Size, jewel.Weight, jewel.Price, jewelSellPrice));
+                }
+                else
+                {
+                    this.fileWriter.WriteLine(String.Format(GlobalConstants.JewelDetail, jewel.Type, jewel.Weight, jewel.Price, jewelSellPrice));
+                }
+            }
+
+            this.fileWriter.WriteLine(String.Format(GlobalConstants.GeneralInformation, this.jewelries.TotalWeight, this.jewelries.TotalSum));
             this.fileWriter.WriteLine(GlobalConstants.LastRow);
             this.fileWriter.WriteLine(GlobalConstants.EndHtml);
             this.cssWriter.WriteLine(GlobalConstants.CssContent);

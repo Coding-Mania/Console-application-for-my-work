@@ -28,7 +28,9 @@
 
         public const string JewelDetail = "<tr>\r\n<td>{0}</td>\r\n<td>{1}гр.</td>\r\n<td>{2}лв.</td>\r\n<td>{3}лв</td>\r\n<td><input type=\"checkbox\"></td></tr>";
 
-        public const string GeneralInformation = "<tr><td colspan=\"4\" style=\"font-weight:bold\">Общ грамаж: {0}/гр. * {1}лв. = {2}лв.</td></tr>";
+        public const string JewelDetailWithSize = "<tr>\r\n<td>{0} ({1})размер</td>\r\n<td>{2}гр.</td>\r\n<td>{3}лв.</td>\r\n<td>{4}лв</td>\r\n<td><input type=\"checkbox\"></td></tr>";
+
+        public const string GeneralInformation = "<tr><td colspan=\"2\" style=\"font-weight:bold\">Общ грамаж: {0}/гр.</td><td colspan=\"2\" style=\"font-weight:bold\">Обща главница: {1}лв.</td></tr>";
 
         public const string LastRow = "<tr><td class=\"lastrow\" colspan=\"4\" style=\"font-weight:bold\">Всички суми са закръглени до най-близкото кръгло число!</td></tr>";
 
