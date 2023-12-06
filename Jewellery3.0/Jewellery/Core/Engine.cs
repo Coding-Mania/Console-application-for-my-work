@@ -94,17 +94,19 @@
                 }
             }
 
+            var counter = 1;
+
             foreach (var jewel in this.jewelries.GetJewelries())
             {
                 var jewelSellPrice = Math.Round((decimal)jewel.Weight * sellPrice);
 
                 if (jewel.Size != null)
                 {
-                    this.fileWriter.WriteLine(String.Format(GlobalConstants.JewelDetailWithSize, jewel.Type, jewel.Size, jewel.Weight, jewel.Price, jewelSellPrice));
+                    this.fileWriter.WriteLine(String.Format(GlobalConstants.JewelDetailWithSize, counter++, jewel.Type, jewel.Size, jewel.Weight, jewel.Price, jewelSellPrice));
                 }
                 else
                 {
-                    this.fileWriter.WriteLine(String.Format(GlobalConstants.JewelDetail, jewel.Type, jewel.Weight, jewel.Price, jewelSellPrice));
+                    this.fileWriter.WriteLine(String.Format(GlobalConstants.JewelDetail, counter++, jewel.Type, jewel.Weight, jewel.Price, jewelSellPrice));
                 }
             }
 
