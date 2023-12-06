@@ -33,6 +33,7 @@
 
         public void Run()
         {
+            Console.ForegroundColor = ConsoleColor.Green;
             this.consoleWriter.Write(GlobalConstants.FolderMessage);
 
             var folderAnser = this.reader.ReadLine().ToLower();
@@ -67,7 +68,7 @@
                     var type = args[0];
                     var weight = double.Parse(args[1]);
 
-                    var price = Math.Round((decimal)double.Parse(args[1]) * pricePerGram, 2);
+                    var price = Math.Round((decimal)double.Parse(args[1]) * pricePerGram);
                     var size = (args.Length == 3) ? args[2] : null;
 
                     var jewel = this.jewelryFactory.GetJewelry(type, weight, price, size);
@@ -88,8 +89,10 @@
                 }
                 catch (Exception ex)
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Please enter valid data!!!");
                     Console.WriteLine(ex.Message);
+                    Console.ForegroundColor = ConsoleColor.Green;
                 }
             }
 
