@@ -1,5 +1,6 @@
 ﻿namespace GoldJewelry.Repository
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -15,7 +16,7 @@
             this.jewelries = jewelries;
         }
 
-        public double TotalWeight => jewelries.Sum(j => j.Weight);
+        public double TotalWeight => Math.Round(jewelries.Sum(j => j.Weight), 2);
 
         public decimal TotalSum => jewelries.Sum(j => j.Price);
 

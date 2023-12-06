@@ -68,7 +68,7 @@
                     var type = args[0];
                     var weight = double.Parse(args[1]);
 
-                    var price = Math.Round((decimal)double.Parse(args[1]) * pricePerGram);
+                    var price = Math.Round((decimal)double.Parse(args[1]) * pricePerGram, 2);
                     var size = (args.Length == 3) ? args[2] : null;
 
                     var jewel = this.jewelryFactory.GetJewelry(type, weight, price, size);
