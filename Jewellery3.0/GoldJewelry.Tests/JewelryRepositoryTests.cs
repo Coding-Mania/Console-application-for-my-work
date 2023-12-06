@@ -2,6 +2,7 @@ namespace GoldJewelry.Tests
 {
     using System.Collections.Generic;
     using System.Linq;
+
     using Models;
     using Models.Contracts;
     using Repository;
