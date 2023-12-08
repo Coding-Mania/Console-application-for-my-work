@@ -17,5 +17,16 @@
 
             Assert.Equivalent(expected, actual);
         }
+
+        [Fact]
+        public void CreateRightObjectWithSize()
+        {
+            JewelryFactory jewelrieFactori = new JewelryFactory();
+
+            var actual = jewelrieFactori.GetJewelry("Test", 2.33, 75, "55");
+            var expected = new Jewelry("Test", 2.33, 75, "55");
+
+            Assert.Equivalent(expected, actual);
+        }
     }
 }
